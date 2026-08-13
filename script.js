@@ -1,193 +1,293 @@
-// Funções de texto
-// Manipulando Texto
-let frase = prompt("Digite uma frase:");
+// 1 - Área de um Retângulo
+let largura = 10;
+let altura = 5;
 
-// Quantidade de caracteres
-console.log("Quantidade de caracteres: " + frase.length);
+let area = largura * altura;
 
-// Frase em maiúsculas
-console.log("Maiúsculas: " + frase.toUpperCase());
+console.log("1 - Área:", area);
 
-// Frase em minúsculas
-console.log("Minúsculas: " + frase.toLowerCase());
 
-// Substituindo uma palavra
-let palavraAntiga = prompt("Qual palavra deseja substituir?");
-let palavraNova = prompt("Digite a nova palavra:");
+// 2 - Dobro e Metade
+let numero = 20;
 
-let novaFrase = frase.replace(palavraAntiga, palavraNova);
-console.log("Frase modificada: " + novaFrase);
+console.log("2 - Dobro:", numero * 2);
+console.log("2 - Metade:", numero / 2);
 
-// Verificando se existe uma palavra
-let palavra = prompt("Digite uma palavra para verificar se existe na frase:");
 
-if (frase.includes(palavra)) {
-    console.log("A palavra existe na frase.");
+// 3 - Média Aritmética
+let n1 = 8;
+let n2 = 7;
+let n3 = 9;
+
+let media = (n1 + n2 + n3) / 3;
+
+console.log("3 - Média:", media);
+
+
+// 4 - Conversão de Temperatura
+let celsius = 30;
+
+let fahrenheit = (celsius * 9 / 5) + 32;
+
+console.log("4 - Fahrenheit:", fahrenheit);
+
+
+// 1 - Comparando dois números
+let numero1 = 10;
+let numero2 = 20;
+
+console.log("5 - Primeiro é maior:", numero1 > numero2);
+console.log("5 - Primeiro é menor ou igual:", numero1 <= numero2);
+console.log("5 - Os números são iguais:", numero1 === numero2);
+
+
+// 2 - Maioridade
+let idade = 65;
+
+console.log("6 - É maior de idade:", idade >= 18);
+console.log("6 - É idosa:", idade >= 60);
+
+
+// 1 - Verificação de Maioridade
+let idadeMaioridade = 20;
+
+if (idadeMaioridade >= 18) {
+    console.log("7 - Você é maior de idade");
 } else {
-    console.log("A palavra não existe na frase.");
+    console.log("7 - Você é menor de idade");
 }
 
-// Mostrando o caractere da posição 5
-console.log("Caractere da posição 5: " + frase.charAt(4));
 
-// Funções Matemáticas
-// Adivinhar o números
-let numero = Math.floor(Math.random() * 10) + 1
-let palpite = Number(prompt("Adivinhe um número entre 1 e 10"))
-if(palpite == numero) {
-    console.log("Parabéns! Você acertou!")
+// 2 - Verificação de Aprovado
+let nota = 8;
+
+if (nota >= 7) {
+    console.log("8 - Aprovado");
 } else {
-    console.log("Você errou! O número era " + numero)
+    console.log("8 - Reprovado");
 }
 
-// Arredondando valores
-let arredonda = Number(prompt("Digite um número decimal:"))
-console.log(Math.ceil(arredonda))
-console.log(Math.floor(arredonda))
-console.log(Math.round(arredonda))
 
-// Manipulando números
-let numeros = [12, 45, 8, 67, 23, 90, 5, 34, 18, 55];
+// 3 - Verificar Temperatura
+let temperatura = 32;
 
-console.log("Maior número: " + Math.max(...numeros));
-console.log("Menor número: " + Math.min(...numeros));
-
-// Soma de Dois Números
-let numero = Number(prompt("Digite um número:"));
-
-console.log("Valor absoluto: " + Math.abs(valor));
-console.log("Elevado à sexta potência: " + Math.pow(valor, 6));
-console.log("Raiz quadrada: " + Math.sqrt(valor));
-
-// Funções Declarativas:
-// Saudação
-function saudacao() {
-    console.log("Olá! Seja bem-vindo!");
+if (temperatura > 30) {
+    console.log("9 - Está quente");
+} else {
+    console.log("9 - Está frio");
 }
 
-saudacao();
 
-// Contar Caracteres
-function contarCaracteres() {
-    let palavra = prompt("Digite uma palavra:");
-    return palavra.length;
+// 4 - Classificação de Idade
+let idadeClassificacao = 25;
+
+if (idadeClassificacao < 12) {
+    console.log("10 - Criança");
+} else if (idadeClassificacao < 17) {
+    console.log("10 - Adolescente");
+} else if (idadeClassificacao < 59) {
+    console.log("10 - Adulto");
+} else {
+    console.log("10 - Idoso");
 }
 
-console.log(contarCaracteres());
 
-// Maior Número
-function maiorNumero() {
-    let n1 = Number(prompt("Digite o primeiro número:"));
-    let n2 = Number(prompt("Digite o segundo número:"));
+// 5 - Sistema de Notas
+let notaEscolar = 85;
 
-    if (n1 > n2) {
-        return n1;
-    } else {
-        return n2;
-    }
+if (notaEscolar > 90) {
+    console.log("11 - A");
+} else if (notaEscolar > 80) {
+    console.log("11 - B");
+} else if (notaEscolar > 70) {
+    console.log("11 - C");
+} else if (notaEscolar > 60) {
+    console.log("11 - D");
+} else {
+    console.log("11 - F");
 }
 
-console.log(maiorNumero());
 
-// Potência
-function potencia() {
-    let base = Number(prompt("Digite a base:"));
-    let expoente = Number(prompt("Digite o expoente:"));
+// 6 - Classificação de Pistas
+let distancia = 1000;
 
-    return Math.pow(base, expoente);
+if (distancia < 400) {
+    console.log("12 - Pista curta");
+} else if (distancia < 800) {
+    console.log("12 - Pista média");
+} else if (distancia < 1500) {
+    console.log("12 - Pista longa");
+} else {
+    console.log("12 - Pista muito longa");
 }
 
-console.log(potencia());
 
-// Contagem
-function contagem(inicio, fim) {
-    for (let i = inicio; i <= fim; i++) {
-        console.log(i);
-    }
+// 7 - Pontuação do Jogo
+let pontuacao = 7500;
+
+if (pontuacao < 1000) {
+    console.log("13 - Iniciante");
+} else if (pontuacao < 5000) {
+    console.log("13 - Intermediário");
+} else if (pontuacao < 10000) {
+    console.log("13 - Avançado");
+} else {
+    console.log("13 - Mestre");
 }
 
-contagem(5, 15);
 
-// Funções com Parâmetros
-// Saudação
-function saudacao(nome) {
-    console.log("Olá, " + nome + "!");
+
+// 1 - Elegível para Promoção
+let anos = 6;
+let projetos = 5;
+
+if (anos >= 5 || projetos > 10) {
+    console.log("14 - Você está elegível para promoção");
+} else {
+    console.log("14 - Você não está elegível para promoção");
 }
 
-saudacao("Lucas");
 
-// Soma de Dois Números
-function soma(n1, n2) {
-    return n1 + n2;
+// 2 - Entrar em um Evento
+let idadeEvento = 25;
+
+if (idadeEvento >= 18 && idadeEvento <= 30) {
+    console.log("15 - Você pode entrar no evento");
+} else {
+    console.log("15 - Você não pode entrar no evento");
 }
 
-console.log(soma(10, 20));
 
-// Número Par ou Ímpar
-function parOuImpar(numero) {
-    if (numero % 2 == 0) {
-        return "Par";
-    } else {
-        return "Ímpar";
-    }
+// 3 - Verificação de Login
+let usuario = "admin";
+let senha = "1234";
+
+if (usuario === "admin" && senha === "1234") {
+    console.log("16 - Login bem-sucedido");
+} else {
+    console.log("16 - Nome de usuário ou senha incorretos");
 }
 
-console.log(parOuImpar(7));
 
-// Média de Três Notas
-function media(n1, n2, n3) {
-    return (n1 + n2 + n3) / 3;
+// 4 - Intervalo de Valores
+let numeroIntervalo = 35;
+
+if (numeroIntervalo >= 10 && numeroIntervalo <= 20) {
+    console.log("17 - O número está dentro do intervalo entre 10 e 20");
+} else if (numeroIntervalo >= 30 && numeroIntervalo <= 50) {
+    console.log("17 - O número está dentro do intervalo entre 30 e 50");
+} else {
+    console.log("17 - Ele não está dentro do intervalo de 10 e 20, nem 30 e 50");
 }
 
-console.log(media(8, 7, 9));
 
-// Dobro de um Número
-function dobro(numero) {
-    return numero * 2;
+// 1 - Dias da Semana
+let dia = 3;
+
+switch (dia) {
+    case 1:
+        console.log("18 - Domingo");
+        break;
+
+    case 2:
+        console.log("18 - Segunda-feira");
+        break;
+
+    case 3:
+        console.log("18 - Terça-feira");
+        break;
+
+    case 4:
+        console.log("18 - Quarta-feira");
+        break;
+
+    case 5:
+        console.log("18 - Quinta-feira");
+        break;
+
+    case 6:
+        console.log("18 - Sexta-feira");
+        break;
+
+    case 7:
+        console.log("18 - Sábado");
+        break;
+
+    default:
+        console.log("18 - Número inválido. Insira um valor entre 1 e 7.");
 }
 
-console.log(dobro(15));
 
-// Aprovação
-function aprovacao(media) {
-    if (media >= 7) {
-        return "Aprovado";
-    } else {
-        return "Reprovado";
-    }
+// 2 - Classificação de Idade
+let idadeJuvenil = 15;
+
+switch (idadeJuvenil) {
+    case 5:
+        console.log("19 - Infantil A");
+        break;
+
+    case 10:
+        console.log("19 - Infantil B");
+        break;
+
+    case 15:
+        console.log("19 - Juvenil A");
+        break;
+
+    case 20:
+        console.log("19 - Juvenil B");
+        break;
+
+    case 30:
+        console.log("19 - Adulto");
+        break;
+
+    default:
+        console.log("19 - Idade inválida. Insira 5, 10, 15, 20 ou 30.");
 }
 
-console.log(aprovacao(8));
 
-// Calculadora
-function calculadora(n1, n2, operacao) {
+// 3 - Turno de Trabalho
+let turno = "M";
 
-    if (operacao == "+") {
-        return n1 + n2;
-    } else if (operacao == "-") {
-        return n1 - n2;
-    } else if (operacao == "*") {
-        return n1 * n2;
-    } else if (operacao == "/") {
-        return n1 / n2;
-    } else {
-        return "Operação inválida";
-    }
+switch (turno) {
+    case "M":
+        console.log("20 - Bom dia!");
+        break;
 
+    case "V":
+        console.log("20 - Boa tarde!");
+        break;
+
+    case "N":
+        console.log("20 - Boa noite!");
+        break;
+
+    default:
+        console.log("20 - Turno inválido. Insira M, V ou N.");
 }
 
-console.log(calculadora(10, 5, "*"));
 
-// Desafio: Fatorial
-function fatorial(numero) {
+// 4 - Estações do Ano
+let estacao = 2;
 
-    let resultado = 1;
+switch (estacao) {
+    case 1:
+        console.log("21 - Primavera");
+        break;
 
-    for (let i = numero; i >= 1; i--) {
-        resultado = resultado * i;
-    }
+    case 2:
+        console.log("21 - Verão");
+        break;
 
-    return resultado;
+    case 3:
+        console.log("21 - Outono");
+        break;
+
+    case 4:
+        console.log("21 - Inverno");
+        break;
+
+    default:
+        console.log("21 - Estação inválida. Insira um número de 1 a 4.");
 }
-
-console.log(fatorial(5));
