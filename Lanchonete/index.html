@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>Lanchonete</h1>
+
+    <h2>Escolha seu lanche</h2>
+
+    <div class="produtos">
+
+        <div class="produto" onclick="adicionarLanche('Hamburguer')">
+            <img src="img/hamburguer.jpg" alt="Hamburguer">
+            <p>Hamburguer</p>
+        </div>
+
+        <div class="produto" onclick="adicionarLanche('Pizza')">
+            <img src="img/pizza.png" alt="Pizza">
+            <p>Pizza</p>
+        </div>
+
+        <div class="produto" onclick="adicionarLanche('Refrigerante')">
+            <img src="img/refrigerante.webp" alt="Refrigerante">
+            <p>Refrigerante</p>
+        </div>
+
+    </div>
+
+
+    <h2>Lista dos lanches do pedido</h2>
+
+    <div id="lista"></div>
+
+    <p>Quantidade de itens: <span id="quantidade">0</span></p>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
