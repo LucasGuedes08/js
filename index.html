@@ -1,11 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha Pokédex</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <script src="script.js"></script>
+  <main class="pokedex">
+    <header class="pokedex-topo">
+      <div class="luzes">
+        <span class="luz-principal"></span>
+        <span class="luz-pequena vermelha"></span>
+        <span class="luz-pequena amarela"></span>
+        <span class="luz-pequena verde"></span>
+      </div>
+      <div class="topo-texto">
+        <span class="topo-subtitulo">DISPOSITIVO DE PESQUISA</span>
+        <h1>Minha Pokédex</h1>
+      </div>
+    </header>
+
+    <div class="pokedex-conteudo">
+      <form id="form-busca" class="form-busca">
+        <label for="input">Encontre um Pokémon</label>
+        <div class="campo-busca">
+          <input type="text" id="input" placeholder="Ex.: pikachu ou 25" autocomplete="off" required>
+          <button type="submit" id="botao">Buscar <span aria-hidden="true">⌕</span></button>
+        </div>
+      </form>
+
+      <div class="atalhos" aria-label="Pokémons populares">
+        <span>Experimente:</span>
+        <button type="button" data-pokemon="pikachu">Pikachu</button>
+        <button type="button" data-pokemon="charmander">Charmander</button>
+        <button type="button" data-pokemon="bulbasaur">Bulbasaur</button>
+        <button type="button" data-pokemon="squirtle">Squirtle</button>
+      </div>
+
+      <section id="resultado" class="resultado" aria-live="polite">
+        <p class="mensagem">Carregando Pokémon...</p>
+      </section>
+
+      <nav class="navegacao" aria-label="Navegar entre Pokémons">
+        <button type="button" id="anterior" disabled>← Anterior</button>
+        <span class="legenda">POKÉDEX • POKEAPI</span>
+        <button type="button" id="proximo" disabled>Próximo →</button>
+      </nav>
+    </div>
+  </main>
 </body>
 </html>

@@ -1,293 +1,117 @@
-// 1 - Área de um Retângulo
-let largura = 10;
-let altura = 5;
+const input = document.getElementById("input");
+const botao = document.getElementById("botao");
+const resultado = document.getElementById("resultado");
+const anterior = document.getElementById("anterior");
+const proximo = document.getElementById("proximo");
+let pokemonAtual = null;
 
-let area = largura * altura;
+const nomesTipos = {
+  normal: "Normal", fire: "Fogo", water: "Água", grass: "Planta",
+  electric: "Elétrico", ice: "Gelo", fighting: "Lutador",
+  poison: "Venenoso", ground: "Terra", flying: "Voador",
+  psychic: "Psíquico", bug: "Inseto", rock: "Pedra",
+  ghost: "Fantasma", dragon: "Dragão", dark: "Sombrio",
+  steel: "Aço", fairy: "Fada"
+};
 
-console.log("1 - Área:", area);
+const nomesStatus = {
+  hp: "HP", attack: "Ataque", defense: "Defesa",
+  "special-attack": "Atq. Esp.", "special-defense": "Def. Esp.",
+  speed: "Velocidade"
+};
 
-
-// 2 - Dobro e Metade
-let numero = 20;
-
-console.log("2 - Dobro:", numero * 2);
-console.log("2 - Metade:", numero / 2);
-
-
-// 3 - Média Aritmética
-let n1 = 8;
-let n2 = 7;
-let n3 = 9;
-
-let media = (n1 + n2 + n3) / 3;
-
-console.log("3 - Média:", media);
-
-
-// 4 - Conversão de Temperatura
-let celsius = 30;
-
-let fahrenheit = (celsius * 9 / 5) + 32;
-
-console.log("4 - Fahrenheit:", fahrenheit);
-
-
-// 1 - Comparando dois números
-let numero1 = 10;
-let numero2 = 20;
-
-console.log("5 - Primeiro é maior:", numero1 > numero2);
-console.log("5 - Primeiro é menor ou igual:", numero1 <= numero2);
-console.log("5 - Os números são iguais:", numero1 === numero2);
-
-
-// 2 - Maioridade
-let idade = 65;
-
-console.log("6 - É maior de idade:", idade >= 18);
-console.log("6 - É idosa:", idade >= 60);
-
-
-// 1 - Verificação de Maioridade
-let idadeMaioridade = 20;
-
-if (idadeMaioridade >= 18) {
-    console.log("7 - Você é maior de idade");
-} else {
-    console.log("7 - Você é menor de idade");
+function formatarNome(nome) {
+  return nome.replaceAll("-", " ").replace(/\b\w/g, letra => letra.toUpperCase());
 }
 
+async function buscarPokemon(nome) {
+  nome = String(nome).trim().toLowerCase().replaceAll(" ", "-");
+  if (!nome) {
+    resultado.innerHTML = '<p class="mensagem">Digite o nome ou número de um Pokémon.</p>';
+    return;
+  }
 
-// 2 - Verificação de Aprovado
-let nota = 8;
+  resultado.innerHTML = '<p class="mensagem">Procurando Pokémon...</p>';
+  botao.disabled = true;
 
-if (nota >= 7) {
-    console.log("8 - Aprovado");
-} else {
-    console.log("8 - Reprovado");
+  try {
+    const resposta = await fetch("https://pokeapi.co/api/v2/pokemon/" + encodeURIComponent(nome));
+
+    if (!resposta.ok) {
+      if (resposta.status === 404) {
+        resultado.innerHTML = '<p class="mensagem">Pokémon não encontrado. Tente outro nome ou número.</p>';
+        return;
+      }
+      throw new Error("Falha ao consultar a API");
+    }
+
+    const dados = await resposta.json();
+    pokemonAtual = dados.id;
+    input.value = formatarNome(dados.name);
+
+    const imagem = dados.sprites.other["official-artwork"].front_default || dados.sprites.front_default;
+    const tipos = dados.types.map(item => {
+      const tipo = item.type.name;
+      return `<span class="tipo ${tipo}">${nomesTipos[tipo] || formatarNome(tipo)}</span>`;
+    }).join("");
+
+    const estatisticas = dados.stats.map(item => {
+      const nomeStatus = nomesStatus[item.stat.name] || formatarNome(item.stat.name);
+      const valor = item.base_stat;
+      const largura = Math.min(100, (valor / 200) * 100);
+      return `<div class="estatistica">
+        <span>${nomeStatus}</span><span class="valor">${valor}</span>
+        <div class="barra"><span style="width: ${largura}%"></span></div>
+      </div>`;
+    }).join("");
+
+    const habilidades = dados.abilities
+      .map(item => formatarNome(item.ability.name)).join(", ");
+
+    resultado.innerHTML = `
+      <div class="pokemon-grid">
+        <div class="painel-imagem">
+          <div class="tela-topo"><span></span><span></span></div>
+          <div class="tela"><img src="${imagem}" alt="Imagem do Pokémon ${formatarNome(dados.name)}"></div>
+          <span class="mini-texto">POKÉMON IDENTIFICADO</span>
+        </div>
+        <div class="painel-dados">
+          <span class="numero">Nº ${String(dados.id).padStart(4, "0")}</span>
+          <h2 class="nome-pokemon">${formatarNome(dados.name)}</h2>
+          <div class="tipos">${tipos}</div>
+          <div class="infos-rapidas">
+            <div class="info"><small>Altura</small><strong>${(dados.height / 10).toFixed(1)} m</strong></div>
+            <div class="info"><small>Peso</small><strong>${(dados.weight / 10).toFixed(1)} kg</strong></div>
+          </div>
+          <h3 class="secao-titulo">Estatísticas base</h3>
+          ${estatisticas}
+          <p class="habilidades"><strong>Habilidades:</strong> ${habilidades}</p>
+        </div>
+      </div>`;
+
+    anterior.disabled = dados.id <= 1;
+    proximo.disabled = false;
+  } catch (erro) {
+    resultado.innerHTML = '<p class="mensagem">Erro ao conectar com a PokéAPI. Tente novamente.</p>';
+  } finally {
+    botao.disabled = false;
+  }
 }
 
+document.getElementById("form-busca").addEventListener("submit", function(evento) {
+  evento.preventDefault();
+  buscarPokemon(input.value);
+});
 
-// 3 - Verificar Temperatura
-let temperatura = 32;
+document.querySelectorAll("[data-pokemon]").forEach(botaoAtalho => {
+  botaoAtalho.addEventListener("click", () => buscarPokemon(botaoAtalho.dataset.pokemon));
+});
 
-if (temperatura > 30) {
-    console.log("9 - Está quente");
-} else {
-    console.log("9 - Está frio");
-}
+anterior.addEventListener("click", () => {
+  if (pokemonAtual > 1) buscarPokemon(pokemonAtual - 1);
+});
+proximo.addEventListener("click", () => {
+  if (pokemonAtual !== null) buscarPokemon(pokemonAtual + 1);
+});
 
-
-// 4 - Classificação de Idade
-let idadeClassificacao = 25;
-
-if (idadeClassificacao < 12) {
-    console.log("10 - Criança");
-} else if (idadeClassificacao < 17) {
-    console.log("10 - Adolescente");
-} else if (idadeClassificacao < 59) {
-    console.log("10 - Adulto");
-} else {
-    console.log("10 - Idoso");
-}
-
-
-// 5 - Sistema de Notas
-let notaEscolar = 85;
-
-if (notaEscolar > 90) {
-    console.log("11 - A");
-} else if (notaEscolar > 80) {
-    console.log("11 - B");
-} else if (notaEscolar > 70) {
-    console.log("11 - C");
-} else if (notaEscolar > 60) {
-    console.log("11 - D");
-} else {
-    console.log("11 - F");
-}
-
-
-// 6 - Classificação de Pistas
-let distancia = 1000;
-
-if (distancia < 400) {
-    console.log("12 - Pista curta");
-} else if (distancia < 800) {
-    console.log("12 - Pista média");
-} else if (distancia < 1500) {
-    console.log("12 - Pista longa");
-} else {
-    console.log("12 - Pista muito longa");
-}
-
-
-// 7 - Pontuação do Jogo
-let pontuacao = 7500;
-
-if (pontuacao < 1000) {
-    console.log("13 - Iniciante");
-} else if (pontuacao < 5000) {
-    console.log("13 - Intermediário");
-} else if (pontuacao < 10000) {
-    console.log("13 - Avançado");
-} else {
-    console.log("13 - Mestre");
-}
-
-
-
-// 1 - Elegível para Promoção
-let anos = 6;
-let projetos = 5;
-
-if (anos >= 5 || projetos > 10) {
-    console.log("14 - Você está elegível para promoção");
-} else {
-    console.log("14 - Você não está elegível para promoção");
-}
-
-
-// 2 - Entrar em um Evento
-let idadeEvento = 25;
-
-if (idadeEvento >= 18 && idadeEvento <= 30) {
-    console.log("15 - Você pode entrar no evento");
-} else {
-    console.log("15 - Você não pode entrar no evento");
-}
-
-
-// 3 - Verificação de Login
-let usuario = "admin";
-let senha = "1234";
-
-if (usuario === "admin" && senha === "1234") {
-    console.log("16 - Login bem-sucedido");
-} else {
-    console.log("16 - Nome de usuário ou senha incorretos");
-}
-
-
-// 4 - Intervalo de Valores
-let numeroIntervalo = 35;
-
-if (numeroIntervalo >= 10 && numeroIntervalo <= 20) {
-    console.log("17 - O número está dentro do intervalo entre 10 e 20");
-} else if (numeroIntervalo >= 30 && numeroIntervalo <= 50) {
-    console.log("17 - O número está dentro do intervalo entre 30 e 50");
-} else {
-    console.log("17 - Ele não está dentro do intervalo de 10 e 20, nem 30 e 50");
-}
-
-
-// 1 - Dias da Semana
-let dia = 3;
-
-switch (dia) {
-    case 1:
-        console.log("18 - Domingo");
-        break;
-
-    case 2:
-        console.log("18 - Segunda-feira");
-        break;
-
-    case 3:
-        console.log("18 - Terça-feira");
-        break;
-
-    case 4:
-        console.log("18 - Quarta-feira");
-        break;
-
-    case 5:
-        console.log("18 - Quinta-feira");
-        break;
-
-    case 6:
-        console.log("18 - Sexta-feira");
-        break;
-
-    case 7:
-        console.log("18 - Sábado");
-        break;
-
-    default:
-        console.log("18 - Número inválido. Insira um valor entre 1 e 7.");
-}
-
-
-// 2 - Classificação de Idade
-let idadeJuvenil = 15;
-
-switch (idadeJuvenil) {
-    case 5:
-        console.log("19 - Infantil A");
-        break;
-
-    case 10:
-        console.log("19 - Infantil B");
-        break;
-
-    case 15:
-        console.log("19 - Juvenil A");
-        break;
-
-    case 20:
-        console.log("19 - Juvenil B");
-        break;
-
-    case 30:
-        console.log("19 - Adulto");
-        break;
-
-    default:
-        console.log("19 - Idade inválida. Insira 5, 10, 15, 20 ou 30.");
-}
-
-
-// 3 - Turno de Trabalho
-let turno = "M";
-
-switch (turno) {
-    case "M":
-        console.log("20 - Bom dia!");
-        break;
-
-    case "V":
-        console.log("20 - Boa tarde!");
-        break;
-
-    case "N":
-        console.log("20 - Boa noite!");
-        break;
-
-    default:
-        console.log("20 - Turno inválido. Insira M, V ou N.");
-}
-
-
-// 4 - Estações do Ano
-let estacao = 2;
-
-switch (estacao) {
-    case 1:
-        console.log("21 - Primavera");
-        break;
-
-    case 2:
-        console.log("21 - Verão");
-        break;
-
-    case 3:
-        console.log("21 - Outono");
-        break;
-
-    case 4:
-        console.log("21 - Inverno");
-        break;
-
-    default:
-        console.log("21 - Estação inválida. Insira um número de 1 a 4.");
-}
+buscarPokemon("pikachu");
