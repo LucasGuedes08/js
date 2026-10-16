@@ -3,52 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Minha Pokédex</title>
+  <title>Clima Hoje | Previsão do Tempo</title>
   <link rel="stylesheet" href="style.css">
   <script src="script.js" defer></script>
 </head>
 <body>
-  <main class="pokedex">
-    <header class="pokedex-topo">
-      <div class="luzes">
-        <span class="luz-principal"></span>
-        <span class="luz-pequena vermelha"></span>
-        <span class="luz-pequena amarela"></span>
-        <span class="luz-pequena verde"></span>
-      </div>
-      <div class="topo-texto">
-        <span class="topo-subtitulo">DISPOSITIVO DE PESQUISA</span>
-        <h1>Minha Pokédex</h1>
-      </div>
+  <main class="container">
+    <header class="cabecalho">
+      <div class="marca"><span class="marca-icone">☀</span><span>clima<span class="marca-destaque">hoje</span></span></div>
+      <span class="cabecalho-info">PREVISÃO DO TEMPO</span>
     </header>
 
-    <div class="pokedex-conteudo">
+    <section class="introducao">
+      <span class="subtitulo">CONSULTE O TEMPO EM TEMPO REAL</span>
+      <h1>Como está o tempo <span>por aí?</span></h1>
+      <p>Pesquise uma cidade para conferir o clima atual e os próximos 7 dias.</p>
+
       <form id="form-busca" class="form-busca">
-        <label for="input">Encontre um Pokémon</label>
-        <div class="campo-busca">
-          <input type="text" id="input" placeholder="Ex.: pikachu ou 25" autocomplete="off" required>
-          <button type="submit" id="botao">Buscar <span aria-hidden="true">⌕</span></button>
-        </div>
+        <label class="sr-only" for="input">Nome da cidade</label>
+        <span class="icone-local" aria-hidden="true">⌖</span>
+        <input type="text" id="input" placeholder="Digite o nome da cidade..." required>
+        <button id="buscar" type="submit">Buscar cidade →</button>
       </form>
 
-      <div class="atalhos" aria-label="Pokémons populares">
-        <span>Experimente:</span>
-        <button type="button" data-pokemon="pikachu">Pikachu</button>
-        <button type="button" data-pokemon="charmander">Charmander</button>
-        <button type="button" data-pokemon="bulbasaur">Bulbasaur</button>
-        <button type="button" data-pokemon="squirtle">Squirtle</button>
+      <div class="sugestoes">
+        <span>Buscas rápidas:</span>
+        <button type="button" data-cidade="São Paulo">São Paulo</button>
+        <button type="button" data-cidade="Rio de Janeiro">Rio de Janeiro</button>
+        <button type="button" data-cidade="Curitiba">Curitiba</button>
+        <button type="button" data-cidade="Recife">Recife</button>
       </div>
+    </section>
 
-      <section id="resultado" class="resultado" aria-live="polite">
-        <p class="mensagem">Carregando Pokémon...</p>
-      </section>
+    <section id="resultado" class="resultado" aria-live="polite">
+      <p class="mensagem">Carregando a previsão...</p>
+    </section>
 
-      <nav class="navegacao" aria-label="Navegar entre Pokémons">
-        <button type="button" id="anterior" disabled>← Anterior</button>
-        <span class="legenda">POKÉDEX • POKEAPI</span>
-        <button type="button" id="proximo" disabled>Próximo →</button>
-      </nav>
-    </div>
+    <footer>Dados meteorológicos fornecidos por Open-Meteo</footer>
   </main>
 </body>
 </html>

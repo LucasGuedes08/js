@@ -1,182 +1,112 @@
 * { box-sizing: border-box; }
-
-:root {
-  font-family: Arial, Helvetica, sans-serif;
-  color: #253043;
-}
-
+:root { font-family: Arial, Helvetica, sans-serif; color: #eaf2ff; }
 body {
-  min-height: 100vh;
   margin: 0;
-  display: grid;
-  place-items: center;
-  padding: 30px 16px;
-  background: radial-gradient(circle at 20% 10%, #fff 0, #eef1f6 55%, #dce2ea 100%);
+  min-height: 100vh;
+  background: radial-gradient(circle at 92% 0, #1b4169 0, transparent 39%),
+              linear-gradient(145deg, #101f36 0%, #0a1527 100%);
 }
-
 button, input { font: inherit; }
 button { cursor: pointer; }
+.container { width: min(100% - 40px, 1140px); margin: 0 auto; }
 
-.pokedex {
-  width: min(100%, 990px);
-  overflow: hidden;
-  background: #dc3043;
-  border: 5px solid #ab2031;
-  border-radius: 28px;
-  box-shadow: 0 20px 0 #a42234, 0 30px 55px #28394a3b;
+.cabecalho { display: flex; align-items: center; justify-content: space-between; padding: 32px 0; border-bottom: 1px solid #ffffff18; }
+.marca { display: flex; align-items: center; gap: 12px; font-size: 25px; font-weight: 900; letter-spacing: -1px; }
+.marca-icone { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 14px; background: #ffbd54; color: #182a42; font-size: 27px; }
+.marca-destaque { color: #6fc3f9; }
+.cabecalho-info { font-size: 11px; color: #9cacc5; font-weight: bold; letter-spacing: 2px; }
+.introducao { padding: 57px 0 33px; }
+.subtitulo { color: #79c5f3; font-size: 12px; font-weight: bold; letter-spacing: 2px; }
+h1 { margin: 11px 0 12px; font-size: clamp(29px, 5vw, 49px); letter-spacing: -1.8px; }
+h1 span { color: #79c5f3; }
+.introducao p { color: #a7b6cb; margin: 0 0 27px; font-size: 15px; }
+
+.form-busca {
+  max-width: 760px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 9px 9px 17px;
+  border: 1px solid #36516e;
+  border-radius: 14px;
+  background: #20334c;
+  box-shadow: 0 14px 30px #030b1652;
 }
+.icone-local { color: #83cafa; font-size: 30px; line-height: 1; }
+.form-busca input { min-width: 0; flex: 1; padding: 11px 0; background: transparent; border: 0; outline: 0; color: #fff; }
+.form-busca input::placeholder { color: #9eaec3; }
+.form-busca:focus-within { border-color: #78bff0; }
+.form-busca button { border: 0; border-radius: 9px; padding: 13px 20px; background: #60baff; color: #08213a; font-weight: 800; }
+.form-busca button:hover { background: #91d0ff; }
+.form-busca button:disabled { opacity: .6; cursor: wait; }
+.sugestoes { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin-top: 18px; }
+.sugestoes span { color: #91a4bf; font-size: 12px; }
+.sugestoes button { padding: 7px 13px; background: #213650; border: 1px solid #36516f; border-radius: 25px; color: #d4e3f7; font-size: 12px; }
+.sugestoes button:hover { background: #345475; }
 
-.pokedex-topo {
-  min-height: 116px;
+.resultado { padding-bottom: 34px; }
+.mensagem { margin: 20px 0 70px; padding: 30px; border-radius: 15px; background: #1b2e48; color: #bdd4ea; text-align: center; }
+.clima-atual {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding: 24px 35px;
-  border-bottom: 5px solid #a62234;
-  background: #ee4656;
+  gap: 30px;
+  padding: 35px 42px;
+  border: 1px solid #77bdff59;
+  border-radius: 23px;
+  background: linear-gradient(120deg, #286fbb, #244c91 60%, #253d73);
+  box-shadow: 0 20px 36px #00000029;
 }
+.rotulo { display: block; font-size: 11px; font-weight: 800; letter-spacing: 1.8px; color: #c3e4ff; }
+.cidade-nome { margin: 12px 0 5px; font-size: clamp(25px, 4vw, 38px); letter-spacing: -.6px; }
+.data-hoje { color: #cee1fa; margin: 0; font-size: 13px; }
+.temperatura-grande { display: flex; align-items: center; gap: 14px; margin: 13px 0 6px; }
+.icone-grande { font-size: 72px; line-height: 1.2; }
+.temperatura-grande strong { font-size: clamp(54px, 8vw, 83px); font-weight: 800; letter-spacing: -5px; }
+.descricao-clima { margin: 0; color: #e1edff; font-size: 16px; }
+.detalhes-clima { display: grid; grid-template-columns: 1fr; gap: 13px; min-width: 220px; }
+.detalhe { display: flex; align-items: center; gap: 13px; padding: 14px 18px; border: 1px solid #ffffff2b; border-radius: 13px; background: #ffffff19; }
+.detalhe-icone { font-size: 24px; }
+.detalhe small { display: block; margin-bottom: 3px; color: #c6e0fb; font-size: 11px; }
+.detalhe strong { font-size: 19px; }
 
-.luzes { display: flex; align-items: flex-start; gap: 9px; }
-.luz-principal {
-  display: block;
-  width: 67px;
-  height: 67px;
-  margin-right: 8px;
-  border: 7px solid #fff;
-  border-radius: 50%;
-  background: radial-gradient(circle at 30% 25%, #e5ffff, #44cde9 42%, #1680be 75%);
-  box-shadow: 0 0 0 3px #9c2436, 0 0 20px #83f6ff8a;
-}
-.luz-pequena { width: 15px; height: 15px; border: 2px solid #7f2432; border-radius: 50%; }
-.vermelha { background: #ff6d73; }
-.amarela { background: #ffd566; }
-.verde { background: #83dc89; }
-
-.topo-texto { text-align: right; color: #fff; }
-.topo-subtitulo { font-size: 10px; letter-spacing: 2px; opacity: .85; font-weight: 800; }
-h1 { margin: 5px 0 0; font-size: clamp(25px, 4vw, 37px); }
-
-.pokedex-conteudo { padding: 28px 34px 30px; }
-.form-busca label { display: block; margin-bottom: 9px; color: white; font-weight: 700; }
-.campo-busca { display: flex; gap: 10px; }
-.campo-busca input {
-  min-width: 0;
-  flex: 1;
-  padding: 14px 16px;
-  border: 3px solid #9c2535;
-  border-radius: 12px;
-  outline: none;
-  background: #fff;
-}
-.campo-busca input:focus { border-color: #58d3e7; }
-.campo-busca button {
-  padding: 12px 24px;
-  border: 2px solid #112c47;
-  border-radius: 12px;
-  background: #173d60;
-  color: #fff;
-  font-weight: 800;
-}
-.campo-busca button:hover { background: #24577f; }
-.campo-busca button span { font-size: 23px; vertical-align: middle; }
-
-.atalhos { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; margin: 14px 0 24px; }
-.atalhos span { color: #ffe9ea; font-size: 12px; font-weight: bold; }
-.atalhos button {
-  border: 1px solid #ffadb5;
-  border-radius: 30px;
-  padding: 7px 12px;
-  background: #ffffff1d;
-  color: #fff;
-  font-size: 12px;
-}
-.atalhos button:hover { background: #ffffff42; }
-
-.resultado {
-  min-height: 385px;
-  border: 4px solid #9e2033;
-  border-radius: 19px;
-  background: #f6f7fb;
-  padding: 20px;
-}
-.mensagem { text-align: center; margin: 130px 8px; color: #68758a; font-weight: bold; }
-
-.pokemon-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); gap: 24px; }
-.painel-imagem { min-width: 0; }
-.tela-topo { display: flex; align-items: center; gap: 6px; margin: 0 0 9px 13px; }
-.tela-topo span { width: 8px; height: 8px; border-radius: 50%; background: #f46d76; }
-.tela {
-  min-height: 270px;
+.titulo-previsao { margin: 37px 0 18px; }
+.titulo-previsao h2 { margin: 0 0 5px; font-size: 23px; }
+.titulo-previsao p { margin: 0; font-size: 13px; color: #91a7c1; }
+.dias-grid {
   display: grid;
-  place-items: center;
-  position: relative;
-  overflow: hidden;
-  border: 10px solid #d7dce5;
-  border-radius: 15px 15px 15px 40px;
-  background: radial-gradient(circle at center, #fbffff 0, #dcf8e9 65%, #c5edd8 100%);
-  box-shadow: inset 0 0 0 3px #9db9bd;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(128px, 1fr);
+  gap: 11px;
+  overflow-x: auto;
+  padding: 1px 1px 12px;
+  scrollbar-color: #516e90 #152640;
 }
-.tela::before { content: ""; width: 190px; height: 190px; position: absolute; border: 3px solid #9bd4c166; border-radius: 50%; }
-.tela img { width: min(100%, 235px); height: 235px; object-fit: contain; position: relative; image-rendering: auto; filter: drop-shadow(0 10px 6px #2a635b23); }
-.mini-texto { display: block; margin: 10px 0 0; text-align: center; color: #586478; font-size: 11px; letter-spacing: 1.5px; font-weight: 800; }
+.dia-card { min-height: 205px; padding: 20px 12px; text-align: center; border-radius: 15px; border: 1px solid #35475e; background: #1a2a41; }
+.dia-card:first-child { background: #23476f; border-color: #5b9bcc; }
+.dia-nome { display: block; font-size: 15px; font-weight: 800; text-transform: capitalize; }
+.dia-data { display: block; margin-top: 5px; color: #9bb2ce; font-size: 11px; }
+.dia-icone { display: block; margin: 19px 0 13px; font-size: 36px; }
+.dia-condicao { display: block; color: #bed0e5; font-size: 11px; min-height: 26px; }
+.temperaturas { display: flex; gap: 8px; align-items: center; justify-content: center; margin-top: 14px; font-size: 14px; }
+.temperaturas .max { color: #ffca80; font-weight: 800; }
+.temperaturas .min { color: #a7c2de; }
+footer { padding: 14px 0 30px; text-align: center; font-size: 11px; color: #6d849e; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
 
-.painel-dados { min-width: 0; }
-.numero { color: #8a95a5; font-weight: 900; font-size: 14px; letter-spacing: 1px; }
-.nome-pokemon { margin: 5px 0 11px; font-size: clamp(25px, 3vw, 34px); text-transform: capitalize; }
-.tipos { display: flex; gap: 8px; flex-wrap: wrap; }
-.tipo { padding: 7px 13px; border-radius: 25px; background: #39495f; color: #fff; font-size: 12px; font-weight: 800; }
-.tipo.fire { background: #f47c4b; }
-.tipo.water { background: #4c95d9; }
-.tipo.grass { background: #57aa70; }
-.tipo.electric { background: #ebbb33; color: #34303b; }
-.tipo.poison { background: #a67bd2; }
-.tipo.flying { background: #849ac9; }
-.tipo.bug { background: #86ad45; }
-.tipo.normal { background: #999b9f; }
-.tipo.ground { background: #bc9556; }
-.tipo.psychic { background: #d971aa; }
-.tipo.fighting { background: #bf5b4a; }
-.tipo.ice { background: #63bcbc; }
-.tipo.rock { background: #98876d; }
-.tipo.ghost { background: #8770b1; }
-.tipo.dragon { background: #7465b9; }
-.tipo.dark { background: #646271; }
-.tipo.steel { background: #829aaa; }
-.tipo.fairy { background: #d58fb0; }
-
-.infos-rapidas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 11px; margin: 19px 0; }
-.info { padding: 12px; border: 1px solid #dce2eb; border-radius: 11px; background: #fff; }
-.info small { display: block; color: #8190a1; font-weight: 800; font-size: 11px; text-transform: uppercase; margin-bottom: 5px; }
-.info strong { color: #233a50; font-size: 15px; }
-.secao-titulo { font-size: 13px; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 11px; color: #516278; }
-.estatistica { display: grid; grid-template-columns: 82px 35px 1fr; align-items: center; gap: 7px; margin: 9px 0; font-size: 11px; font-weight: 700; }
-.estatistica .valor { text-align: right; color: #4f6375; }
-.barra { height: 8px; background: #e4e9f0; border-radius: 10px; overflow: hidden; }
-.barra span { display: block; height: 100%; border-radius: 10px; background: linear-gradient(90deg, #ef5562, #f6b260); }
-.habilidades { margin: 14px 0 0; color: #5d6c7e; font-size: 12px; line-height: 1.5; }
-
-.navegacao { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 22px; }
-.navegacao button { padding: 11px 17px; border: 2px solid #812035; border-radius: 9px; background: #ffe7e8; color: #8b2231; font-weight: 800; }
-.navegacao button:hover:not(:disabled) { background: white; }
-.navegacao button:disabled { opacity: .45; cursor: not-allowed; }
-.legenda { color: #ffd4d9; font-size: 10px; font-weight: 800; letter-spacing: 1px; }
-
-@media (max-width: 690px) {
-  body { padding: 16px 10px 28px; }
-  .pokedex { border-radius: 20px; }
-  .pokedex-topo { padding: 18px; min-height: 95px; gap: 12px; }
-  .luz-principal { width: 50px; height: 50px; border-width: 5px; }
-  .luz-pequena { width: 11px; height: 11px; }
-  .topo-subtitulo { font-size: 8px; letter-spacing: 1px; }
-  .pokedex-conteudo { padding: 18px 15px 25px; }
-  .pokemon-grid { grid-template-columns: 1fr; }
-  .tela { min-height: 240px; }
-  .tela img { height: 220px; }
-  .resultado { padding: 15px; }
-  .legenda { display: none; }
+@media (max-width: 650px) {
+  .container { width: min(100% - 28px, 1140px); }
+  .cabecalho { padding: 22px 0; }
+  .cabecalho-info { display: none; }
+  .introducao { padding-top: 38px; }
+  .form-busca { flex-wrap: wrap; }
+  .form-busca button { width: 100%; }
+  .clima-atual { padding: 24px; flex-direction: column; align-items: stretch; gap: 22px; }
+  .detalhes-clima { grid-template-columns: repeat(2, minmax(0, 1fr)); min-width: 0; }
+  .detalhe { padding: 12px; }
+  .temperatura-grande strong { font-size: 68px; }
+  .icone-grande { font-size: 60px; }
 }
 @media (max-width: 380px) {
-  .campo-busca { flex-direction: column; }
-  .campo-busca button { width: 100%; }
+  .detalhes-clima { grid-template-columns: 1fr; }
 }
